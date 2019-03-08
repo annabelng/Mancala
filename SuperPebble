@@ -1,0 +1,18 @@
+package Mancala;
+
+import java.awt.Color;
+
+public class SuperPebble extends Pebble{
+	
+	int jump;
+	
+	public SuperPebble(int x, int y, Color c, int jump){
+		super(x, y, c);
+		
+		this.x = x;
+		this.y = y;
+		this.c = c;
+		this.jump = jump;
+	}
+	
+}
