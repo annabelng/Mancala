@@ -4,6 +4,15 @@ public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		Cell a1 = new Cell(400, 200);
+		Cell a2 = new Cell(600, 200);
+		Cell a3 = new Cell(800, 200);
+		Cell a4 = new Cell(1000, 200);
+		Cell b1 = new Cell(400, 400);
+		Cell b2 = new Cell(600, 400);
+		Cell b3 = new Cell(800, 400);
+		Cell b4 = new Cell(1000, 400);
 
 	}
 
