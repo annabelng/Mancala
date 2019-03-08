@@ -15,7 +15,7 @@ public class Pebble {
 	}
 
 	public void paint(Graphics g) {
-		g.fillOval(0, 0, 800, 800);
+		g.fillOval(x, y, 50, 50);
 		g.setColor(c);
 	}
 	
