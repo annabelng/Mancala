@@ -7,9 +7,9 @@ public class Cell {
 	int y;
 	ArrayList<Pebble> cell;
 	
-	public Cell(){
-		int x = 100;
-		int y = 100;
-		ArrayList<Pebble> cell = new ArrayList<Pebble>();
+	public Cell(int x, int y){
+		this.x = x;
+		this.y = y;
+		cell = new ArrayList<Pebble>();
 	}
 }
