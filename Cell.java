@@ -1,4 +1,5 @@
-package Mancala;
+import java.util.List;
+
 
 import java.util.ArrayList;
 
@@ -7,9 +8,9 @@ public class Cell {
 	int y;
 	ArrayList<Pebble> cell;
 	
-	public Cell(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Cell(){
+		this.x = 100;
+		this.y = 100;
 		cell = new ArrayList<Pebble>();
 	}
 }
