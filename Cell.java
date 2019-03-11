@@ -1,3 +1,4 @@
+package Mancala;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ public class Cell extends JPanel{
 		this.y = y;
 		this.c = c;
 		cell = new ArrayList<Pebble>();
-	
 		
 		cell.add(0,p1);
 		cell.add(1,p2);
@@ -33,9 +33,13 @@ public class Cell extends JPanel{
 		super.paintComponents(g);
 		
 		g.fillOval(x, y, size, size);
-		
-		Pebble p = new Pebble(100,200);
-		p1.paint(g);
-		//p1.paint(g);
+	
+	}
+	public int sizee(){
+		int size = cell.size();
+		return size;
+	}
+	public int getX(){
+		return x;
 	}
 }

@@ -1,3 +1,4 @@
+package Mancala;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.applet.Applet;
@@ -73,6 +74,13 @@ public class Board extends JPanel{
 		Cell c8 = new Cell(bottomLeftX+=225,bottomRowY, navy);
 		c8.paint(g,bottomLeftX,bottomRowY,size);
 		
+		//int x = (int)(Math.random()*(325-225+1)+225);
+		//int y = (int)(Math.random()*(180-80+1)+80);
+		
+		for(int i = 0, x = (int)(Math.random()*(325-225+1)+225); i < c1.sizee(); i++, x +=50){
+			Pebble p = new Pebble(x,300);
+			p.paint(g);
+		}
 		
 		
 	}
