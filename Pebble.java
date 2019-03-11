@@ -1,3 +1,4 @@
+package Mancala;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -5,7 +6,12 @@ import java.awt.Graphics;
 public class Pebble {
 	int x;
 	int y;
-	Color c;
+	
+	int r = (int)(Math.random()*(255-0-1));
+	int g = (int)(Math.random()*(255-0-1));
+	int b = (int)(Math.random()*(255-0-1));
+			
+	Color c = new Color(r, g, b);
 	
 	public Pebble(int x, int y, Color c){
 		this.x = x;
