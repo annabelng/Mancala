@@ -1,5 +1,3 @@
-package Mancala;
-
 import java.awt.Color;
 import java.awt.Graphics;
 
@@ -19,8 +17,9 @@ public class Pebble {
 	}
 
 	public void paint(Graphics g) {
-		g.fillOval(x, y, 50, 50);
 		g.setColor(c);
+		g.fillOval(x, y, 50, 50);
+		
 	}
 	
 	public int getX(){

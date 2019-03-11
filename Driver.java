@@ -26,7 +26,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	int screen_width = 1200;
 	int screen_height = 650;
-	String bg = "mancala2.png";
+	
 	//JLabel board;
 	Font font = new Font ("Courier New", 1, 35);
 	Color brown = new Color(101, 76, 33);
@@ -35,26 +35,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void paint(Graphics g){
 		super.paintComponents(g);
 		
-		g.setColor(brown);;
-		g.fillRect(0, 0, screen_width, screen_height);
-		g.setColor(navy);
-		g.fillRect(30, 25, 170, 560);
-		Pebble p1 = new Pebble(225, 80, navy);
-		p1.paint(g);
-		Pebble p2 = new Pebble(450, 80, navy);
-		p2.paint(g);
-		Pebble p3 = new Pebble(675, 80, navy);
-		p3.paint(g);
-		Pebble p4 = new Pebble(900, 80, navy);
-		p4.paint(g);
-		Pebble p5 = new Pebble(225, 350, navy);
-		p5.paint(g);
-		Pebble p6 = new Pebble(450, 350, navy);
-		p6.paint(g);
-		Pebble p7 = new Pebble(675, 350, navy);
-		p7.paint(g);
-		Pebble p8 = new Pebble(900, 350, navy);
-		p8.paint(g);
+		Board board = new Board();
+		board.paint(g);
 		
 		
 	}
