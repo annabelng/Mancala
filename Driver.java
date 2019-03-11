@@ -38,9 +38,25 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		g.setColor(brown);;
 		g.fillRect(0, 0, screen_width, screen_height);
 		g.setColor(navy);
-		g.fillRect(50, 50, 100, 560);
-		Pebble p = new Pebble(500, 500, brown);
-		p.paint(g);
+		g.fillRect(30, 25, 170, 560);
+		Pebble p1 = new Pebble(225, 80, navy);
+		p1.paint(g);
+		Pebble p2 = new Pebble(450, 80, navy);
+		p2.paint(g);
+		Pebble p3 = new Pebble(675, 80, navy);
+		p3.paint(g);
+		Pebble p4 = new Pebble(900, 80, navy);
+		p4.paint(g);
+		Pebble p5 = new Pebble(225, 350, navy);
+		p5.paint(g);
+		Pebble p6 = new Pebble(450, 350, navy);
+		p6.paint(g);
+		Pebble p7 = new Pebble(675, 350, navy);
+		p7.paint(g);
+		Pebble p8 = new Pebble(900, 350, navy);
+		p8.paint(g);
+		
+		
 	}
 	
 	public void update(){
