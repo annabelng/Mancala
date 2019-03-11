@@ -13,10 +13,9 @@ public class Pebble {
 			
 	Color c = new Color(r, g, b);
 	
-	public Pebble(int x, int y, Color c){
+	public Pebble(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.c = c;
 	}
 
 	public void paint(Graphics g) {
