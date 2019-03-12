@@ -1,26 +1,40 @@
 package Mancala;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class Pebble {
-	int x;
-	int y;
+	private int x;
+	private int y;
+	private int w, h;
 	
-	int r = (int)(Math.random()*(255-0-1));
-	int g = (int)(Math.random()*(255-0-1));
-	int b = (int)(Math.random()*(255-0-1));
-			
-	//Color c = new Color(r, g, b);
-	Color c = Color.CYAN;
+	private JLabel img;
 	
-	
-	public Pebble(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Pebble(String filename){
+		
+		String src =  new File("").getAbsolutePath()+"/src/";
+		ImageIcon pebble = new ImageIcon(src+filename);
+		//connect the file to the img
+		img = new JLabel(pebble);
+		
+		x = 100;
+		y = 200;
+		w = 50;
+		h = 52;
+		
+		img.setBounds(x,y,w,h);
+		
+	}
+	public JLabel getImg(){
+		img.setBounds(x,y,w,h);
+		return img; //getter for object's img
 	}
 
 	public void paint(Graphics g) {
-		g.setColor(c);
+		
 		g.fillOval(x, y, 50, 50);
 		
 	}

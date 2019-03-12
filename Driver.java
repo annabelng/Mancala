@@ -22,24 +22,27 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
+//250 110
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener{
 
-	int screen_width = 1200;
-	int screen_height = 650;
+	int screen_width = 1000;
+	int screen_height = 472;
+
+	String bg = "Mancala.png";
+	JLabel background;
 	
-	//JLabel board;
 	Font font = new Font ("Courier New", 1, 35);
-	Color brown = new Color(101, 76, 33);
-	Color navy = new Color(0, 0, 128);
+	
+	Pebble[] pebbs = new Pebble[4];
+	
+	Cell c1 = new Cell(225,70);
 	
 	public void paint(Graphics g){
 		super.paintComponents(g);
 		
-		Board board = new Board();
-		board.paint(g);
-		
-		
+		//Board board = new Board();
+		//board.paint(g);
+			
 	}
 	
 	public void update(){
@@ -62,16 +65,36 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public Driver(){
 		
 		JFrame f = new JFrame();
-		f.setTitle("Tetris");
+		f.setTitle("Mancala");
 		f.setSize(screen_width, screen_height);
-		f.getContentPane();
+		f.getContentPane().setBackground(new Color (220, 220, 220));
+		
+
+		String src = new File("").getAbsolutePath()+"/src/"; //path to image setup
+		ImageIcon backg = new ImageIcon(src+bg);    //setups icon image
+		background = new JLabel(backg);
+		background.setBounds(0, 0, 1000, 472);
+		//set location and size of icon
+		f.add(background);
+		
+		for (int i = 0; i < pebbs.length; i++){
+			
+			pebbs[i] = new Pebble("pebble.png");
+			pebbs[i].setX((int)(Math.random()*((c1.getX()+c1.getWidth()-15)-c1.getX())+c1.getX()));
+			pebbs[i].setY((int)(Math.random()*((c1.getY()+c1.getWidth()-15)-c1.getY())+c1.getY()));
+			f.add(pebbs[i].getImg());
+		}
+		
+		f.add(background);
 		f.setResizable(false);
+		f.setLayout(null);
 		f.addKeyListener(this);
+		
 		f.add(this);
 		
 
 		// end creating objects
-		t = new Timer(60, this);
+		t = new Timer(17, this);
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);

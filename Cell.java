@@ -9,24 +9,19 @@ import javax.swing.JPanel;
 public class Cell extends JPanel{
 	int x;
 	int y;
+	int width;
 	Color c;
 	ArrayList<Pebble> cell;
 	
-	Pebble p1 = new Pebble(x,y);
+	/*Pebble p1 = new Pebble(x,y);
 	Pebble p2 = new Pebble(x,y+20);
 	Pebble p3 = new Pebble(x+20,y);
-	Pebble p4 = new Pebble(x+20,y+20);
+	Pebble p4 = new Pebble(x+20,y+20);*/
 	
-	public Cell(int x, int y, Color c){
+	public Cell(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.c = c;
-		cell = new ArrayList<Pebble>();
-		
-		cell.add(0,p1);
-		cell.add(1,p2);
-		cell.add(2,p3);
-		cell.add(3,p4);
+		width = 70;
 	}
 
 	public void paint(Graphics g, int x, int y, int size){
@@ -41,5 +36,11 @@ public class Cell extends JPanel{
 	}
 	public int getX(){
 		return x;
+	}
+	public int getY(){
+		return y;
+	}
+	public int getWidth() {
+		return width;
 	}
 }
