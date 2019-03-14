@@ -32,16 +32,21 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	JLabel background;
 	
 	Font font = new Font ("Courier New", 1, 35);
-	
+	Board board;
 	Pebble[] pebbs = new Pebble[4];
+	Pebble[] pebbs2 = new Pebble[4];
+	Pebble[] pebbs3 = new Pebble[4];
+	Pebble[] pebbs4 = new Pebble[4];
 	
 	Cell c1 = new Cell(225,70);
-	
+	//430 70
+	Cell c2 = new Cell(415, 70);
+	Cell c3 = new Cell(615, 70);
+	Cell c4 = new Cell(815, 70);
 	public void paint(Graphics g){
 		super.paintComponents(g);
 		
-		//Board board = new Board();
-		//board.paint(g);
+		board.paint(g);
 			
 	}
 	
@@ -59,7 +64,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Driver d = new Driver();
-		
+
 	}
 	
 	public Driver(){
@@ -68,21 +73,36 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.setTitle("Mancala");
 		f.setSize(screen_width, screen_height);
 		f.getContentPane().setBackground(new Color (220, 220, 220));
+		/*f.setResizable(false);
+		f.addKeyListener(this);
+		f.addMouseListener(this);
 		
-
+		board = new Board("Mancala.png");*/
+		
 		String src = new File("").getAbsolutePath()+"/src/"; //path to image setup
 		ImageIcon backg = new ImageIcon(src+bg);    //setups icon image
 		background = new JLabel(backg);
 		background.setBounds(0, 0, 1000, 472);
 		//set location and size of icon
+		
 		f.add(background);
 		
-		for (int i = 0; i < pebbs.length; i++){
-			
-			pebbs[i] = new Pebble("pebble.png");
-			pebbs[i].setX((int)(Math.random()*((c1.getX()+c1.getWidth()-15)-c1.getX())+c1.getX()));
-			pebbs[i].setY((int)(Math.random()*((c1.getY()+c1.getWidth()-15)-c1.getY())+c1.getY()));
+		c1.drawPebble(c1, pebbs);
+		c2.drawPebble(c2, pebbs2);
+		c3.drawPebble(c3, pebbs3);
+		c4.drawPebble(c4, pebbs4);
+		
+		for(int i= 0; i < pebbs.length; i++) {
 			f.add(pebbs[i].getImg());
+		}
+		for(int i= 0; i < pebbs2.length; i++) {
+			f.add(pebbs2[i].getImg());
+		}
+		for(int i= 0; i < pebbs3.length; i++) {
+			f.add(pebbs3[i].getImg());
+		}
+		for(int i= 0; i < pebbs4.length; i++) {
+			f.add(pebbs4[i].getImg());
 		}
 		
 		f.add(background);
