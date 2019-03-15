@@ -5,42 +5,50 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.geom.AffineTransform;
-import java.awt.image.ImageObserver;
 import java.io.File;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
-public class Pebble {
+public class Pebble extends JButton{
 	private int x;
 	private int y;
+	private int w, h;
 	
-	Image img;
+	private Image img;
+	
 	AffineTransform tx = AffineTransform.getTranslateInstance(x, y);
 
 	public Pebble(String filename){
-		
+		tx = AffineTransform.getTranslateInstance(x, y);
 		String src = new File("").getAbsolutePath() + "/src/";
 		ImageIcon ast = new ImageIcon(src + filename);
-		x = 0;
-		y = 0;
+		x = this.getX();
+		y = this.getY();
 
 		img = getImage(filename);
-	
+		this.setBounds(this.getX(),this.getY(),50,52);
+		init(x, y);
+		
 	}
-	
-	public void paint(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-
-		g2.drawImage(img, x, y, this);
-	}
-
-	
+	/*public JLabel getImg(){
+		img.setBounds(x,y,w,h);
+		return img; //getter for object's img
+	}*/
 	public void init(double a, double b) {
 		tx.setToTranslation(a, b);
-		tx.scale(2, 2);
+		
+		tx.scale(1, 1);
 	}
-	/*public int getX(){
+	public void paint(Graphics g) {
+		
+		Graphics2D g2 = (Graphics2D) g;
+		this.setBounds(this.getX(),this.getY(),50,52);
+		g2.drawImage(img, tx, null);		
+	}
+	
+	public int getX(){
 		return x;
 	}
 	
@@ -54,7 +62,9 @@ public class Pebble {
 	
 	public void setY(int y){
 		this.y = y;
-	}*/
+	}
+	
+
 	private Image getImage(String path) {
 
 		img = Toolkit.getDefaultToolkit().getImage("pebble.png");
