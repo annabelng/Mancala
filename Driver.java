@@ -30,87 +30,46 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	int screen_width = 1000;
 	int screen_height = 472;
 
-	String bg = "Mancala.png";
+	String bg = "begin.png";
 	JLabel background;
 
 	Font font = new Font("Courier New", 1, 35);
 	Board board;
 	Pebble p;
-
-	ArrayList <Integer> testing = new ArrayList <Integer>();
 	
+	int[]test = new int[8];
 	
-	/*
-	 * Pebble[] pebbs = new Pebble[4]; Pebble[] pebbs2 = new Pebble[4]; Pebble[]
-	 * pebbs3 = new Pebble[4]; Pebble[] pebbs4 = new Pebble[4];
-	 */
-
 	Cell c1 = new Cell(225, 70);
 	Cell c2 = new Cell(415, 70);
 	Cell c3 = new Cell(615, 70);
 	Cell c4 = new Cell(780, 70);
-	Cell c5 = new Cell(225, 265);
-	Cell c6 = new Cell(415, 265);
-	Cell c7 = new Cell(615, 265);
-	Cell c8 = new Cell(780, 265);
+	Cell c8 = new Cell(225, 265);
+	Cell c7 = new Cell(415, 265);
+	Cell c6 = new Cell(615, 265);
+	Cell c5 = new Cell(780, 265);
 
 	// 245 280
 	public void paint(Graphics g) {
 		super.paintComponents(g);
 
 		board.paint(g);
-		c1.paintPebble(c1, testing.size(), g);
-		c2.paintPebble(c2, 3, g);
-		c3.paintPebble(c3, 3, g);
-		c4.paintPebble(c4, 3, g);
-		c5.paintPebble(c5, 3, g);
-		c6.paintPebble(c6, 3, g);
-		c7.paintPebble(c7, 3, g);
-		c8.paintPebble(c8, 3, g);
-		// p.paint(g);
+		
+		c1.paintPebble(c1, test[0], g);
+		c2.paintPebble(c2, test[1], g);
+		c3.paintPebble(c3, test[2], g);
+		c4.paintPebble(c4, test[3], g);
+		c5.paintPebble(c5, test[4], g);
+		c6.paintPebble(c6, test[5], g);
+		c7.paintPebble(c7, test[6], g);
+		c8.paintPebble(c8, test[7], g);
+		
 	}
 
 	public void update() {
-		this.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-				if(e.getX()<=(c1.getX()+c1.getWidth()) && e.getX()>=c1.getX()) {
-					System.out.println("cellonee");
-					testing.remove(2);
-				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
+		
 	}
 
-	// ============================ code above
-	// ==========================================
+	// ============================ code above ==========================================
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
@@ -120,7 +79,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Driver d = new Driver();
-
+		
 	}
 
 	public Driver() {
@@ -132,33 +91,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.setResizable(false);
 		f.addKeyListener(this);
 		f.addMouseListener(this);
-		testing.add(2);
+
 		board = new Board("Mancala.png");
 		p = new Pebble("pebble.png");
-		/*
-		 * String src = new File("").getAbsolutePath()+"/src/"; //path to image setup
-		 * ImageIcon backg = new ImageIcon(src+bg); //setups icon image background = new
-		 * JLabel(backg); background.setBounds(0, 0, 1000, 472); //set location and size
-		 * of icon
-		 * 
-		 * f.add(background);
-		 * 
-		 * c1.drawPebble(c1, pebbs); c2.drawPebble(c2, pebbs2); c3.drawPebble(c3,
-		 * pebbs3); c4.drawPebble(c4, pebbs4);
-		 * 
-		 * for(int i= 0; i < pebbs.length; i++) { f.add(pebbs[i].getImg()); } for(int i=
-		 * 0; i < pebbs2.length; i++) { f.add(pebbs2[i].getImg()); } for(int i= 0; i <
-		 * pebbs3.length; i++) { f.add(pebbs3[i].getImg()); } for(int i= 0; i <
-		 * pebbs4.length; i++) { f.add(pebbs4[i].getImg()); }
-		 * 
-		 * f.add(background); f.setResizable(false); f.setLayout(null);
-		 * f.addKeyListener(this);
-		 */
-
+		
+		for(int i = 0; i < test.length; i++) {
+			test[i] = 3;
+		}
+		
 		f.add(this);
 
 		// end creating objects
 		t = new Timer(1000, this);
+		
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
@@ -199,7 +144,11 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getX()<=(c1.getX()+c1.getWidth()) && e.getX()>=c1.getX()) {
+			
+			System.out.println("test click");
+			
+		}
 	}
 
 	@Override
