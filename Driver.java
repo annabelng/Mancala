@@ -27,17 +27,16 @@ import javax.swing.Timer;
 //250 110
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
+	int moves = 0;
 	int screen_width = 1000;
 	int screen_height = 472;
-
+	Home home = new Home(50, 100);
+	boolean mouseClick = true;
 	String bg = "begin.png";
 	JLabel background;
 
-	Font font = new Font("Courier New", 1, 35);
+	Font f = new Font("Din Condensed", Font.BOLD, 40);
 	Board board;
-	Pebble p;
-
-	//int[] test = new int[8];
 
 	int topY = 70;
 	int bottomY = 265;
@@ -51,9 +50,18 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		super.paintComponents(g);
 
 		board.paint(g);
+
 		for (int i = 0; i < 8; i++) {
 			cells.get(i).paintPebble(cells.get(i), a.test[i], g);
 		}
+
+		home.paintPebble(cells.get(8), a.test[8], g);
+		
+		g.setFont(f);
+		String stringMoves = Integer.toString(moves);
+		g.drawString("Moves Taken : " + stringMoves, 50, 40);
+		
+		mouseClick = false;
 
 	}
 
@@ -66,7 +74,9 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
-		repaint();
+		if (mouseClick == true) {
+			repaint();
+		}
 	}
 
 	public static void main(String[] args) {
@@ -86,24 +96,26 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.addMouseListener(this);
 
 		board = new Board("Mancala.png");
-		p = new Pebble("pebble.png");
-	
 
-		//first 4 cells
+		// first 4 cells
 		for (int i = 0, x = 230, y = 70; i < 4; i++, x += 190) {
 			Cell c = new Cell(x, y);
 			cells.add(i, c);
 		}
-		//bottom 4 cells 
+		// bottom 4 cells
 		for (int i = 4, x = 800, y = 265; i < 8; i++, x -= 190) {
 
 			Cell c = new Cell(x, y);
 			cells.add(i, c);
 		}
+
+		Home home = new Home(30, 130);
+		home.setWidth(100);
+		cells.add(8, home);
 		f.add(this);
 
 		// end creating objects
-		t = new Timer(1000, this);
+		t = new Timer(100, this);
 
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,42 +157,68 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		if (e.getX() <= (cells.get(0).getX() + cells.get(0).getWidth()) && 
-				e.getX() >= cells.get(0).getX()) {
-			if(e.getY() <= 140 && e.getY()>=70) {
-			System.out.println("test click");
-			a.cellClicked(0);
+		mouseClick = true;
+
+		if (e.getY() >= 50 && e.getY() <= 200) {
+			if (e.getX() <= (cells.get(0).getX() + cells.get(0).getCircleWidth()) && e.getX() >= cells.get(0).getX()) {
+
+				System.out.println("test click cell0");
+				a.cellClicked(0);
+				moves += 1;
+			}
+			if (e.getX() <= (cells.get(1).getX() + cells.get(1).getCircleWidth()) && e.getX() >= cells.get(1).getX()) {
+
+				System.out.println("cell1");
+				a.cellClicked(1);
+				moves += 1;
+
+			}
+			if (e.getX() <= (cells.get(2).getX() + cells.get(2).getCircleWidth()) && e.getX() >= cells.get(2).getX()) {
+
+				System.out.println("cell2");
+				a.cellClicked(2);
+				moves += 1;
+
+			}
+			if (e.getX() <= (cells.get(3).getX() + cells.get(3).getCircleWidth()) && e.getX() >= cells.get(3).getX()) {
+
+				System.out.println("cell3");
+				a.cellClicked(3);
+				moves+=1;
+
 			}
 		}
-		if (e.getX() <= (cells.get(1).getX() + cells.get(1).getWidth()) && 
-				e.getX() >= cells.get(1).getX()) {
-			if(e.getY() <= 140 && e.getY()>=70) {
-			System.out.println("test click");
-			a.cellClicked(1);
+
+		if (e.getY() >= 250 && e.getY() <= 360) {
+			if (e.getX() <= (cells.get(4).getX() + cells.get(4).getCircleWidth()) && e.getX() >= cells.get(4).getX()) {
+
+				System.out.println("cell4");
+				a.cellClicked(4);
+				moves+=1;
+
+			}
+			if (e.getX() <= (cells.get(5).getX() + cells.get(5).getCircleWidth()) && e.getX() >= cells.get(5).getX()) {
+
+				System.out.println("cell5");
+				a.cellClicked(5);
+				moves+=1;
+
+			}
+			if (e.getX() <= (cells.get(6).getX() + cells.get(6).getCircleWidth()) && e.getX() >= cells.get(6).getX()) {
+
+				System.out.println("cell6");
+				a.cellClicked(6);
+				moves+=1;
+
+			}
+			if (e.getX() <= (cells.get(7).getX() + cells.get(7).getCircleWidth()) && e.getX() >= cells.get(7).getX()) {
+
+				System.out.println("cell7");
+				a.cellClicked(7);
+				moves+=1;
 			}
 		}
-		if (e.getX() <= (cells.get(2).getX() + cells.get(2).getWidth()) && 
-				e.getX() >= cells.get(2).getX()) {
-			if(e.getY() <= 140 && e.getY()>=70) {
-			System.out.println("test click");
-			a.cellClicked(2);
-			}
-		}
-		if (e.getX() <= (cells.get(3).getX() + cells.get(3).getWidth()) && 
-				e.getX() >= cells.get(3).getX()) {
-			if(e.getY() <= 140 && e.getY()>=70) {
-			System.out.println("test click");
-			a.cellClicked(3);
-			}
-		}
-		if (e.getX() <= (cells.get(4).getX() + cells.get(4).getWidth()) && 
-				e.getX() >= cells.get(4).getX()) {
-			if(e.getY() <= 335 && e.getY()>=265) {
-			System.out.println("test click");
-			a.cellClicked(4);
-			}
-		}
+		System.out.println(moves);
 	}
 
 	@Override

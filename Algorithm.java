@@ -9,7 +9,7 @@ public class Algorithm {
 	ArrayList<ArrayList<Integer>> cells = new ArrayList<ArrayList<Integer>>();
 
 	public Algorithm() {
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 8; i++) {
 			test[i] = 3;
 		}
 
@@ -17,7 +17,7 @@ public class Algorithm {
 			cells.add(new ArrayList<Integer>());
 		}
 
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 8; i++) {
 			ArrayList<Integer> cell = cells.get(i);
 			for (int j = 0; j < 3; j++) {
 				cell.add(0);
@@ -55,7 +55,10 @@ public class Algorithm {
 				}
 			}
 			test[n] = 0;
-			System.out.println(test[1]);
+			//System.out.println(test[1]);
+		}
+		for(int i = 0; i < 9;i++) {
+			System.out.print(test[i] + " ");
 		}
 	}
 }
