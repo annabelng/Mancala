@@ -36,6 +36,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	JLabel background;
 
 	Font f = new Font("Din Condensed", Font.BOLD, 40);
+	Font game = new Font("Din Condensed", Font.BOLD, 80);
 	Board board;
 
 	int topY = 70;
@@ -60,6 +61,12 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		g.setFont(f);
 		String stringMoves = Integer.toString(moves);
 		g.drawString("Moves Taken : " + stringMoves, 50, 40);
+		
+		if(a.test[8] == 24) {
+			g.setColor(Color.BLACK);
+			g.setFont(game);
+			g.drawString("GAME OVER", screen_width/2 - 150, screen_height/2);
+		}
 		
 		mouseClick = false;
 
