@@ -32,29 +32,30 @@ import javax.swing.Timer;
 
 public class Board extends JPanel {
 
-	Color brown = new Color(101, 76, 33);
-	Color navy = new Color(0, 0, 128);
-	int screen_width = 2000;
-	int screen_height = 944;
-	int x, y;
+	//x and y location for board
+	private int x, y;
 
-	Image img;
+	//img variable that will contain board image
+	private Image img;
 	
 	public Board(String filename) {
+		//sets up board image to be drawn
 		String src = new File("").getAbsolutePath() + "/src/";
 		ImageIcon ast = new ImageIcon(src + filename);
-		x = 0;
-		y = 0;
+		this.x = 0;
+		this.y = 0;
 
 		img = getImage(filename);
 	}
 
+	//method that allows board to be painted in the paint method
+	// as opposed to simply being added into the frame
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-
 		g2.drawImage(img, x, y, this);
 	}
 
+	//getter for the image
 	private Image getImage(String path) {
 
 		img = Toolkit.getDefaultToolkit().getImage("Mancala.png");

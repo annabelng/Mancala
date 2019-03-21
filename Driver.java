@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-//250 110
 public class Driver extends JPanel implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
 
 	int moves = 0;
@@ -32,12 +31,19 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	int screen_height = 472;
 	Home home = new Home(50, 100);
 	boolean mouseClick = true;
+	boolean gameOver = false;
 	String bg = "begin.png";
 	JLabel background;
-
+	
+	//End endscreen;
 	Font f = new Font("Din Condensed", Font.BOLD, 40);
-	Font game = new Font("Din Condensed", Font.BOLD, 80);
+	Font redo = new Font("Din Condensed", Font.CENTER_BASELINE, 25);
+	Font game = new Font("Din Condensed", Font.BOLD, 180);
+	Font pebb = new Font("Din Condensed", Font.BOLD, 30);
 	Board board;
+	//61 85 193
+	Color end = new Color(61, 85, 193);
+	Color reset = new Color(253,247,174);
 
 	int topY = 70;
 	int bottomY = 265;
@@ -46,28 +52,51 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	ArrayList<Cell> cells = new ArrayList<Cell>();
 	Algorithm a = new Algorithm();
 
-	// 245 280
 	public void paint(Graphics g) {
 		super.paintComponents(g);
 
+		//painting the board png
 		board.paint(g);
-
+		
+		//looping through and painting the pebbles in each cell 
+		//based on the cell location and the given number
 		for (int i = 0; i < 8; i++) {
 			cells.get(i).paintPebble(cells.get(i), a.test[i], g);
 		}
 
+		//paint the pebbles in the home cell
 		home.paintPebble(cells.get(8), a.test[8], g);
-		
+
 		g.setFont(f);
 		String stringMoves = Integer.toString(moves);
-		g.drawString("Moves Taken : " + stringMoves, 50, 40);
+		g.drawString("MOVES TAKEN : " + stringMoves, 50, 40);
+
+		/*g.setColor(reset);
+		g.fillRect(910, 5, 70, 45);
+		g.setFont(redo);
+		g.setColor(Color.black);
+		g.drawString("RESET", 921, 35);*/
 		
-		if(a.test[8] == 24) {
+		for (int i = 0, x = 270, y = 218; i < 4; i++, x += 190) {
+			g.setFont(pebb);
 			g.setColor(Color.BLACK);
-			g.setFont(game);
-			g.drawString("GAME OVER", screen_width/2 - 150, screen_height/2);
+			String pebbles = Integer.toString(a.test[i]);
+			g.drawString(pebbles, x, y);
 		}
-		
+
+		for (int i = 4, x = 840, y = 418; i < 8; i++, x -= 190) {
+			String pebbles = Integer.toString(a.test[i]);
+			g.drawString(pebbles, x, y);
+		}
+
+		if(a.test[8] == 24) {
+			//endscreen.setVisible(true);
+			g.setFont(game);
+			g.setColor(end);
+			g.drawString("GAME OVER", 170, 300);
+			g.setColor(Color.WHITE);
+			g.drawString("GAME OVER", 175, 300);
+		}
 		mouseClick = false;
 
 	}
@@ -76,8 +105,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	}
 
-	// ============================ code above
-	// ==========================================
+	// ============================ code above ==========================================
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
@@ -98,6 +126,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		f.setTitle("Mancala");
 		f.setSize(screen_width, screen_height);
 		f.getContentPane().setBackground(new Color(220, 220, 220));
+
+		String src = new File("").getAbsolutePath() + "/src/"; // path to image setup
+		ImageIcon backg = new ImageIcon(src + bg); // setups icon image
+		background = new JLabel(backg);
+		background.setBounds(0, 0, 1000, 472); // set location and size of icon
+		f.add(background);
+
 		f.setResizable(false);
 		f.addKeyListener(this);
 		f.addMouseListener(this);
@@ -111,7 +146,6 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		}
 		// bottom 4 cells
 		for (int i = 4, x = 800, y = 265; i < 8; i++, x -= 190) {
-
 			Cell c = new Cell(x, y);
 			cells.add(i, c);
 		}
@@ -134,6 +168,10 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+
+		if (e.getKeyCode() == 32) {
+			background.setVisible(false);
+		}
 
 	}
 
@@ -167,65 +205,30 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		mouseClick = true;
 
 		if (e.getY() >= 50 && e.getY() <= 200) {
-			if (e.getX() <= (cells.get(0).getX() + cells.get(0).getCircleWidth()) && e.getX() >= cells.get(0).getX()) {
+			for (int i = 0; i < 4; i++) {
+				if (e.getX() <= (cells.get(i).getX() + cells.get(i).getCircleWidth())
+						&& e.getX() >= cells.get(i).getX() && a.test[i] > 0) {
 
-				System.out.println("test click cell0");
-				a.cellClicked(0);
-				moves += 1;
-			}
-			if (e.getX() <= (cells.get(1).getX() + cells.get(1).getCircleWidth()) && e.getX() >= cells.get(1).getX()) {
-
-				System.out.println("cell1");
-				a.cellClicked(1);
-				moves += 1;
-
-			}
-			if (e.getX() <= (cells.get(2).getX() + cells.get(2).getCircleWidth()) && e.getX() >= cells.get(2).getX()) {
-
-				System.out.println("cell2");
-				a.cellClicked(2);
-				moves += 1;
-
-			}
-			if (e.getX() <= (cells.get(3).getX() + cells.get(3).getCircleWidth()) && e.getX() >= cells.get(3).getX()) {
-
-				System.out.println("cell3");
-				a.cellClicked(3);
-				moves+=1;
-
+					System.out.println("test click cell" + i);
+					a.cellClicked(i);
+					moves += 1;
+				}
 			}
 		}
 
-		if (e.getY() >= 250 && e.getY() <= 360) {
-			if (e.getX() <= (cells.get(4).getX() + cells.get(4).getCircleWidth()) && e.getX() >= cells.get(4).getX()) {
+		if (e.getY() >= 250 && e.getY() <= 390) {
+			for (int i = 4; i < 8; i++) {
+				if (e.getX() <= (cells.get(i).getX() + cells.get(i).getCircleWidth())
+						&& e.getX() >= cells.get(i).getX() && a.test[i] > 0) {
 
-				System.out.println("cell4");
-				a.cellClicked(4);
-				moves+=1;
-
-			}
-			if (e.getX() <= (cells.get(5).getX() + cells.get(5).getCircleWidth()) && e.getX() >= cells.get(5).getX()) {
-
-				System.out.println("cell5");
-				a.cellClicked(5);
-				moves+=1;
-
-			}
-			if (e.getX() <= (cells.get(6).getX() + cells.get(6).getCircleWidth()) && e.getX() >= cells.get(6).getX()) {
-
-				System.out.println("cell6");
-				a.cellClicked(6);
-				moves+=1;
-
-			}
-			if (e.getX() <= (cells.get(7).getX() + cells.get(7).getCircleWidth()) && e.getX() >= cells.get(7).getX()) {
-
-				System.out.println("cell7");
-				a.cellClicked(7);
-				moves+=1;
+					System.out.println("test click cell" + i);
+					a.cellClicked(i);
+					moves += 1;
+				}
 			}
 		}
-		System.out.println(moves);
+		System.out.println("moves:" + moves);
+		
 	}
 
 	@Override

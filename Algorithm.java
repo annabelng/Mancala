@@ -61,4 +61,11 @@ public class Algorithm {
 			System.out.print(test[i] + " ");
 		}
 	}
+/*	
+	public void reset() {
+		for (int i =0; i < 8; i++) {
+			test[i] = 3;
+		}
+		test[8] = 0;
+	}*/
 }
