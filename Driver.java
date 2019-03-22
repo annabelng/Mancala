@@ -34,16 +34,17 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	boolean gameOver = false;
 	String bg = "begin.png";
 	JLabel background;
-	
-	//End endscreen;
+
+	// End endscreen;
 	Font f = new Font("Din Condensed", Font.BOLD, 40);
 	Font redo = new Font("Din Condensed", Font.CENTER_BASELINE, 25);
 	Font game = new Font("Din Condensed", Font.BOLD, 180);
 	Font pebb = new Font("Din Condensed", Font.BOLD, 30);
 	Board board;
-	//61 85 193
+	// 61 85 193
 	Color end = new Color(61, 85, 193);
-	Color reset = new Color(253,247,174);
+	Color reset = new Color(88, 165, 214);
+	Color back = new Color(172, 171, 171);
 
 	int topY = 70;
 	int bottomY = 265;
@@ -55,28 +56,30 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	public void paint(Graphics g) {
 		super.paintComponents(g);
 
-		//painting the board png
+		// painting the board png
 		board.paint(g);
-		
-		//looping through and painting the pebbles in each cell 
-		//based on the cell location and the given number
+
+		// looping through and painting the pebbles in each cell
+		// based on the cell location and the given number
 		for (int i = 0; i < 8; i++) {
 			cells.get(i).paintPebble(cells.get(i), a.test[i], g);
 		}
 
-		//paint the pebbles in the home cell
+		// paint the pebbles in the home cell
 		home.paintPebble(cells.get(8), a.test[8], g);
 
 		g.setFont(f);
 		String stringMoves = Integer.toString(moves);
 		g.drawString("MOVES TAKEN : " + stringMoves, 50, 40);
 
-		/*g.setColor(reset);
+		g.setColor(back);
+		g.fillRect(914, 1, 70, 45);
+		g.setColor(reset);
 		g.fillRect(910, 5, 70, 45);
 		g.setFont(redo);
 		g.setColor(Color.black);
-		g.drawString("RESET", 921, 35);*/
-		
+		g.drawString("RESET", 921, 35);
+
 		for (int i = 0, x = 270, y = 218; i < 4; i++, x += 190) {
 			g.setFont(pebb);
 			g.setColor(Color.BLACK);
@@ -89,8 +92,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.drawString(pebbles, x, y);
 		}
 
-		if(a.test[8] == 24) {
-			//endscreen.setVisible(true);
+		if (a.test[8] == 24) {
+			// endscreen.setVisible(true);
 			g.setFont(game);
 			g.setColor(end);
 			g.drawString("GAME OVER", 170, 300);
@@ -105,7 +108,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 	}
 
-	// ============================ code above ==========================================
+	// ============================ code above
+	// ==========================================
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		update();
@@ -153,6 +157,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		Home home = new Home(30, 130);
 		home.setWidth(100);
 		cells.add(8, home);
+
 		f.add(this);
 
 		// end creating objects
@@ -206,8 +211,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		if (e.getY() >= 50 && e.getY() <= 200) {
 			for (int i = 0; i < 4; i++) {
-				if (e.getX() <= (cells.get(i).getX() + cells.get(i).getCircleWidth())
-						&& e.getX() >= cells.get(i).getX() && a.test[i] > 0) {
+				if (e.getX() <= (cells.get(i).getX() + cells.get(i).getCircleWidth()) && e.getX() >= cells.get(i).getX()
+						&& a.test[i] > 0) {
 
 					System.out.println("test click cell" + i);
 					a.cellClicked(i);
@@ -218,8 +223,8 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 
 		if (e.getY() >= 250 && e.getY() <= 390) {
 			for (int i = 4; i < 8; i++) {
-				if (e.getX() <= (cells.get(i).getX() + cells.get(i).getCircleWidth())
-						&& e.getX() >= cells.get(i).getX() && a.test[i] > 0) {
+				if (e.getX() <= (cells.get(i).getX() + cells.get(i).getCircleWidth()) && e.getX() >= cells.get(i).getX()
+						&& a.test[i] > 0) {
 
 					System.out.println("test click cell" + i);
 					a.cellClicked(i);
@@ -227,8 +232,15 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 				}
 			}
 		}
+		if (e.getX() >= 900 && e.getX() <= 970 && e.getY() >= 0 && e.getY() <= 65) {
+
+			a = new Algorithm();
+			moves = 0;
+			System.out.println("RESET");
+
+		}
 		System.out.println("moves:" + moves);
-		
+
 	}
 
 	@Override
