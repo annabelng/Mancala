@@ -34,14 +34,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 	boolean gameOver = false;
 	String bg = "begin.png";
 	JLabel background;
-
-	// End endscreen;
-	Font f = new Font("Din Condensed", Font.BOLD, 40);
-	Font redo = new Font("Din Condensed", Font.CENTER_BASELINE, 25);
-	Font game = new Font("Din Condensed", Font.BOLD, 180);
-	Font pebb = new Font("Din Condensed", Font.BOLD, 30);
+	
+	//End endscreen;
+	Font move = new Font("Calibri", Font.BOLD, 40);
+	Font redo = new Font("Calibri", Font.CENTER_BASELINE, 25);
+	Font game = new Font("Calibri", Font.BOLD, 150);
+	Font pebb = new Font("Calibri", Font.BOLD, 30);
 	Board board;
-	// 61 85 193
 	Color end = new Color(61, 85, 193);
 	Color reset = new Color(88, 165, 214);
 	Color back = new Color(172, 171, 171);
@@ -68,7 +67,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		// paint the pebbles in the home cell
 		home.paintPebble(cells.get(8), a.test[8], g);
 
-		g.setFont(f);
+		g.setFont(move);
 		String stringMoves = Integer.toString(moves);
 		g.drawString("MOVES TAKEN : " + stringMoves, 50, 40);
 
@@ -78,7 +77,7 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 		g.fillRect(910, 5, 70, 45);
 		g.setFont(redo);
 		g.setColor(Color.black);
-		g.drawString("RESET", 921, 35);
+		g.drawString("RESET", 915, 35);
 
 		for (int i = 0, x = 270, y = 218; i < 4; i++, x += 190) {
 			g.setFont(pebb);
@@ -92,13 +91,13 @@ public class Driver extends JPanel implements ActionListener, KeyListener, Mouse
 			g.drawString(pebbles, x, y);
 		}
 
-		if (a.test[8] == 24) {
+		if (a.test[8] == 2) {
 			// endscreen.setVisible(true);
 			g.setFont(game);
 			g.setColor(end);
-			g.drawString("GAME OVER", 170, 300);
+			g.drawString("GAME OVER", 125, 280);
 			g.setColor(Color.WHITE);
-			g.drawString("GAME OVER", 175, 300);
+			g.drawString("GAME OVER", 130, 280);
 		}
 		mouseClick = false;
 
